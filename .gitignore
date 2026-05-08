@@ -1,0 +1,17 @@
+# Laravel
+job-offers-api/vendor/
+job-offers-api/.env
+job-offers-api/storage/logs/
+job-offers-api/bootstrap/cache/*.php
+
+# Expo / React Native
+job_offers_expo/node_modules/
+job_offers_expo/.expo/
+job_offers_expo/dist/
+job_offers_expo/build/
+
+# System / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
