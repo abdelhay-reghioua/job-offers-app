@@ -6,15 +6,12 @@ import { useAuthStore } from '../src/features/auth/store/auth_store';
 export default function RootLayout() {
   const router   = useRouter();
   const segments = useSegments();
-
   const { initialize, initialized, token, user } = useAuthStore();
 
-  // Initialize auth on app launch
   useEffect(() => {
     initialize();
   }, []);
 
-  // Redirect based on auth state
   useEffect(() => {
     if (!initialized) return;
 

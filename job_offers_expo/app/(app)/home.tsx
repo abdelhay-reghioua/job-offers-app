@@ -10,8 +10,10 @@ import JobCard from '../../src/features/jobs/components/JobCard';
 
 export default function JobsListScreen() {
   const router   = useRouter();
-  const { jobs, loading, fetchJobs } = useJobsStore();
-  const { user } = useAuthStore();
+  const jobs     = useJobsStore((s) => s.jobs) ?? [];
+  const loading  = useJobsStore((s) => s.loading);
+  const fetchJobs = useJobsStore((s) => s.fetchJobs);
+  const user     = useAuthStore((s) => s.user);
 
   const [search, setSearch] = useState('');
 
@@ -25,7 +27,7 @@ export default function JobsListScreen() {
     <View style={styles.container}>
       <View style={styles.header}>
         <View>
-          <Text style={styles.hello}>Hello, {user?.name?.split(' ')[0]} 👋</Text>
+          <Text style={styles.hello}>Hello, {user?.name?.split(' ')[0] ?? 'there'} 👋</Text>
           <Text style={styles.subtitle}>Find your next opportunity</Text>
         </View>
       </View>
@@ -73,13 +75,9 @@ export default function JobsListScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#F8FAFC' },
-
-  header: {
-    paddingHorizontal: 20, paddingTop: 60, paddingBottom: 16,
-  },
+  header: { paddingHorizontal: 20, paddingTop: 60, paddingBottom: 16 },
   hello:    { fontSize: 22, fontWeight: 'bold', color: '#1E293B' },
   subtitle: { fontSize: 14, color: '#64748B', marginTop: 2 },
-
   searchBox: {
     flexDirection: 'row', alignItems: 'center',
     marginHorizontal: 20, marginBottom: 12,
@@ -88,10 +86,8 @@ const styles = StyleSheet.create({
   },
   searchIcon:  { fontSize: 16, marginRight: 8 },
   searchInput: { flex: 1, paddingVertical: 12, fontSize: 15 },
-
   list:   { paddingHorizontal: 20, paddingBottom: 20 },
   loader: { marginTop: 60 },
-
   empty:    { alignItems: 'center', marginTop: 80 },
   emptyIcon: { fontSize: 64, marginBottom: 12 },
   emptyText: { fontSize: 18, fontWeight: '600', color: '#1E293B' },
